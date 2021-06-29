@@ -1,0 +1,5 @@
+<resources>
+  <string name="application_name">FMusic</string>
+  <string name="playback_channel_name">Playback</string>
+  <string name="thumbnail">Thumbnail</string>
+</resources>
