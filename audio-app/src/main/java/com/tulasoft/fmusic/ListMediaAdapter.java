@@ -44,11 +44,11 @@ public class ListMediaAdapter extends BaseAdapter {
             viewVideo = convertView;
 
         MediaItem videoItem = (MediaItem) getItem(position);
-        ((TextView) viewVideo.findViewById(R.id.title)).setText(videoItem.Title());
-        ((TextView) viewVideo.findViewById(R.id.channeltitle)).setText(videoItem.ChannelTitle());
+        ((TextView) viewVideo.findViewById(R.id.mi_title)).setText(videoItem.Title());
+        ((TextView) viewVideo.findViewById(R.id.mi_channeltitle)).setText(videoItem.ChannelTitle());
         Picasso.get()
                 .load(videoItem.MThumbnail()).fit().centerCrop()
-                .into((ImageView) viewVideo.findViewById(R.id.mthumbnail));
+                .into((ImageView) viewVideo.findViewById(R.id.mi_mthumbnail));
         return viewVideo;
     }
 }

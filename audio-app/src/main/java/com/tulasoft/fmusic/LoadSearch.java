@@ -13,12 +13,12 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-public class LoadPopular extends AsyncTask<Void, Void, JSONObject> {
+public class LoadSearch  extends AsyncTask<String, Void, JSONObject> {
     @Override
-    protected JSONObject doInBackground(Void... params)
+    protected JSONObject doInBackground(String... query)
     {
-        //PlayerLibrary.popularList = new ArrayList<MediaItem>();
-        String str= C.popularUrl;
+        Log.e("Search","do in background");
+        String str= C.searchUrl + query[0];
         URLConnection urlConn = null;
         BufferedReader bufferedReader = null;
         try
@@ -60,10 +60,13 @@ public class LoadPopular extends AsyncTask<Void, Void, JSONObject> {
         if(response != null)
         {
             try {
+                Log.e("Search","json");
+                PlayerLibrary.searchList.clear();
                 JSONArray items = response.getJSONArray("items");
                 for(int i = 0; i < items.length(); i++) {
                     JSONObject item = (JSONObject) items.get(i);
-                    String videoID = item.getString("id");
+                    JSONObject id = item.getJSONObject("id");
+                    String videoID = id.getString("videoId");
                     JSONObject snippet = item.getJSONObject("snippet");
                     String title = snippet.getString("title");
                     String channelTitle = snippet.getString("channelTitle");
@@ -74,8 +77,8 @@ public class LoadPopular extends AsyncTask<Void, Void, JSONObject> {
                     String hThumbnail = high.getString("url");
 
                     MediaItem mediaItem = new MediaItem(videoID, title, channelTitle, mThumbnail, hThumbnail);
-                    PlayerLibrary.popularList.add(mediaItem);
-                    PlayerLibrary.popularAdapter.notifyDataSetChanged();
+                    PlayerLibrary.searchList.add(mediaItem);
+                    PlayerLibrary.searchAdapter.notifyDataSetChanged();
                 }
             } catch (JSONException ex) {
                 Log.e("App", "Failure", ex);

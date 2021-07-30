@@ -1,6 +1,7 @@
 package com.tulasoft.fmusic;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -13,13 +14,24 @@ import com.squareup.picasso.Target;
 import java.util.ArrayList;
 
 public class PlayerLibrary {
-    public static ListMediaAdapter arrayAdapter;
+    public static ListMediaAdapter popularAdapter;
+    public static ListMediaAdapter searchAdapter;
+    public static ListMediaAdapter playingAdapter;
     public static ArrayList<MediaItem> playingList;
+    public static ArrayList<MediaItem> popularList;
+    public static ArrayList<MediaItem> searchList;
     public static int playingIndex;
+    public static String playingListName;
+    public static Intent audioPlayerService;
     public static void init(){
         playingList = new ArrayList<MediaItem>();
+        searchList = new ArrayList<MediaItem>();
+        popularList = new ArrayList<MediaItem>();
         playingIndex = 0;
-        arrayAdapter = new ListMediaAdapter(playingList);
+        playingListName = "None";
+        playingAdapter = new ListMediaAdapter(playingList);
+        searchAdapter = new ListMediaAdapter(searchList);
+        popularAdapter = new ListMediaAdapter(popularList);
     }
 
     public static MediaDescriptionCompat getMediaDescription(Context context, MediaItem mediaItem) {
