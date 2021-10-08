@@ -46,6 +46,8 @@ import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.tulasoft.fmusic.R;
 
+import static com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ONE;
+
 public class AudioPlayerService extends Service {
 
 //  private SimpleExoPlayer player;
@@ -73,6 +75,7 @@ public class AudioPlayerService extends Service {
     }
     FPlayer.player.prepare(concatenatingMediaSource);
     FPlayer.player.seekTo(PlayerLibrary.playingIndex, 0);
+    FPlayer.player.setShuffleModeEnabled(true);
     FPlayer.player.setPlayWhenReady(true);
     MainActivity.playerView.setPlayer(FPlayer.player);
     MainActivity.playerView.showController();

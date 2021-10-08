@@ -11,6 +11,7 @@ import android.widget.ListView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import com.google.android.exoplayer2.offline.ProgressiveDownloadAction;
 import com.google.android.exoplayer2.util.Util;
 import com.tulasoft.fmusic.*;
 
@@ -64,6 +65,17 @@ public class SearchFragment extends Fragment {
 
     private void OpenItem(int position){
         PlayerLibrary.playingIndex = position;
+
+        ////////new code
+        ProgressiveDownloadAction action = new ProgressiveDownloadAction(
+            PlayerLibrary.searchList.get(position).Uri(), false, null, null);
+        AudioDownloadService.startWithAction(
+            getContext(),
+            AudioDownloadService.class,
+            action,
+            false);
+
+
         if(PlayerLibrary.audioPlayerService == null){
             PlayerLibrary.playingList = PlayerLibrary.searchList;
             PlayerLibrary.audioPlayerService = new Intent(getActivity(), AudioPlayerService.class);
@@ -79,6 +91,7 @@ public class SearchFragment extends Fragment {
             FPlayer.PlayItem(position);
             Log.e("log","continue play from search");
         }
+        MainActivity.onChangeTrack();
         PlayerLibrary.playingListName = "Search";
     }
 

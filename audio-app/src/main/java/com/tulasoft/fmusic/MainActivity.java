@@ -15,13 +15,13 @@
  */
 package com.tulasoft.fmusic;
 
+import android.app.DownloadManager;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -43,9 +43,12 @@ public class MainActivity extends AppCompatActivity {
   private static TextView np_channelTitle;
   private static ImageView np_thumbnail;
   public static PlayerView playerView;
+  public static DownloadManager downloadManager;
   private FrameLayout layoutBottomSheet;
   private BottomSheetBehavior sheetBehavior;
   private LinearLayout np_topbar;
+  private LinearLayout np_main;
+  private ImageButton np_download;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -66,9 +69,24 @@ public class MainActivity extends AppCompatActivity {
     np_channelTitle = findViewById(R.id.np_channelTitle);
     np_thumbnail = findViewById(R.id.np_thumbnail);
     np_topbar = findViewById(R.id.np_topbar);
+    np_main = findViewById(R.id.np_main);
+    np_download = findViewById(R.id.np_download);
 
     layoutBottomSheet = findViewById(R.id.np_screen);
     sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
+
+    np_download.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = PlayerLibrary.playingList.get(PlayerLibrary.playingIndex).Uri();
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
+        long reference = downloadManager.enqueue(request);
+      }
+    });
+
+
     sheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
       @Override
       public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -77,21 +95,22 @@ public class MainActivity extends AppCompatActivity {
           case BottomSheetBehavior.STATE_EXPANDED:
             navigation.setVisibility(View.GONE);
             np_topbar.setVisibility(View.GONE);
-            np_thumbnail.setVisibility(View.VISIBLE);
+            np_main.setVisibility(View.VISIBLE);
             break;
           case BottomSheetBehavior.STATE_COLLAPSED:
             navigation.setVisibility(View.VISIBLE);
             np_topbar.setVisibility(View.VISIBLE);
-            np_thumbnail.setVisibility(View.INVISIBLE);
+            np_main.setVisibility(View.INVISIBLE);
             break;
           case BottomSheetBehavior.STATE_DRAGGING:
-            np_thumbnail.setVisibility(View.VISIBLE);
+            np_main.setVisibility(View.VISIBLE);
             navigation.setVisibility(View.GONE);
             break;
           case BottomSheetBehavior.STATE_SETTLING:
             break;
         }
       }
+
 
       @Override
       public void onSlide(@NonNull View bottomSheet, float slideOffset) {
@@ -133,6 +152,9 @@ public class MainActivity extends AppCompatActivity {
       switch (item.getItemId()) {
         case R.id.navigation_home:
           loadFragment(homeFragment);
+          if(PlayerLibrary.popularList.size() == 0){
+            new LoadPopular().execute();
+          }
           break;
         case R.id.navigation_search:
           loadFragment(searchFragment);

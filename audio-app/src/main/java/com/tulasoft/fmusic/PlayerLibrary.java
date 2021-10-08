@@ -1,5 +1,6 @@
 package com.tulasoft.fmusic;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -7,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.media.MediaDescriptionCompat;
 import android.support.v4.media.MediaMetadataCompat;
-import com.google.android.exoplayer2.Player;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 

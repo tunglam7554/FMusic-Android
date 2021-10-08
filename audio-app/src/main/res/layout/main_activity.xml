@@ -12,7 +12,6 @@
 
   <FrameLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/border_top"
         android:clickable="true"
         android:id="@+id/np_screen"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
@@ -20,10 +19,10 @@
         app:behavior_peekHeight="96dp">
       <LinearLayout
               android:layout_width="match_parent"
-              android:layout_height="48dp"
+              android:layout_height="54dp"
               android:id="@+id/np_topbar"
-              android:background="@drawable/border_top"
               android:padding="5dp"
+              android:background="@drawable/border_top"
       android:orientation="vertical">
           <TextView
                   android:id="@+id/title"
@@ -43,59 +42,67 @@
     <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/bottom_sheet"
+            android:id="@+id/np_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
             android:padding="10dp"
             android:orientation="vertical"
+            android:visibility="gone"
             android:gravity="center_horizontal"
-            android:background="@android:color/transparent"
+            android:background="@color/background"
             >
         <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
+                android:layout_marginTop="38dp"
                 app:cardCornerRadius="10dp">
             <ImageView
                     android:id="@+id/np_thumbnail"
-                    android:visibility="invisible"
+                    android:background="@android:color/transparent"
                     android:layout_width="350dp"
                     android:layout_height="350dp"/>
         </androidx.cardview.widget.CardView>
 
-        <TextView
-                android:id="@+id/np_title"
-                android:maxLines="1"
-                android:textStyle="bold"
-                android:textSize="24dp"
-                android:ellipsize="end"
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        <TextView
-                android:id="@+id/np_channelTitle"
-                android:maxLines="1"
-                android:textSize="18dp"
-                android:layout_marginTop="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                      android:background="@android:color/transparent"
                      android:layout_width="match_parent"
-                     android:layout_height="400dp">
+                      android:orientation="vertical"
+                      android:paddingTop="10dp"
+                     android:layout_height="match_parent">
+
+                <TextView
+                        android:id="@+id/np_title"
+                        android:maxLines="1"
+                        android:textStyle="bold"
+                        android:textSize="24dp"
+                        android:background="@android:color/transparent"
+                        android:ellipsize="end"
+                        android:layout_marginVertical="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                <TextView
+                        android:id="@+id/np_channelTitle"
+                        android:maxLines="1"
+                        android:textSize="18dp"
+                        android:background="@android:color/transparent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="25dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
             <com.google.android.exoplayer2.ui.PlayerView
                     android:id="@+id/player_view"
-                    android:background="@android:color/black"
+                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     app:controller_layout_id="@layout/np_exoplayer"
                     app:show_timeout="0"
                     app:show_shuffle_button="true"
                     app:repeat_toggle_modes="one"
                     app:hide_on_touch="false"
-                    android:layout_height="match_parent" />
-        </FrameLayout>
+                    android:layout_height="200dp" />
+        </LinearLayout>
     </LinearLayout>
   </FrameLayout>
 
@@ -104,8 +111,10 @@
           android:layout_width="match_parent"
           android:layout_height="48dp"
           android:layout_gravity="bottom"
-          android:background="@color/background"
-          app:itemBackground="@color/background"
+          android:background="@color/np_background"
+          app:itemBackground="@color/np_background"
+          app:labelVisibilityMode="unlabeled"
+          app:elevation="0dp"
           app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
          app:menu="@menu/navigation"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

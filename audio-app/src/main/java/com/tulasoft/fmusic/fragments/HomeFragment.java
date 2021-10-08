@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import com.google.android.exoplayer2.offline.ProgressiveDownloadAction;
 import com.google.android.exoplayer2.util.Util;
 import com.tulasoft.fmusic.*;
 
@@ -51,6 +52,19 @@ public class HomeFragment extends Fragment {
 
     private void OpenItem(int position){
         PlayerLibrary.playingIndex = position;
+        
+
+        //////new code
+        ProgressiveDownloadAction action = new ProgressiveDownloadAction(
+            PlayerLibrary.popularList.get(position).Uri(), false, null, null);
+        AudioDownloadService.startWithAction(
+            this.getContext(),
+            AudioDownloadService.class,
+            action,
+            false);
+
+
+
         if(PlayerLibrary.audioPlayerService == null){
             PlayerLibrary.playingList = PlayerLibrary.popularList;
             PlayerLibrary.audioPlayerService = new Intent(getActivity(), AudioPlayerService.class);
@@ -66,6 +80,7 @@ public class HomeFragment extends Fragment {
             FPlayer.PlayItem(position);
             Log.e("log","continue play from home");
         }
+        MainActivity.onChangeTrack();
         PlayerLibrary.playingListName = "Popular";
 
     }

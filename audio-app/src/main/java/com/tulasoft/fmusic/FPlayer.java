@@ -19,6 +19,8 @@ import com.google.android.exoplayer2.upstream.cache.CacheDataSource;
 import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+import static com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ONE;
+
 public class FPlayer {
     public static SimpleExoPlayer player;
     public static void PlayItem(int index){
@@ -86,6 +88,8 @@ public class FPlayer {
         player.addListener(eventListener);
     }
 
+
+
     public static void preparePlayingList(final Context context){
         player.release();
         player = null;
@@ -104,6 +108,7 @@ public class FPlayer {
         }
         player.prepare(concatenatingMediaSource);
         player.seekTo(PlayerLibrary.playingIndex, 0);
+        player.setShuffleModeEnabled(true);
         player.setPlayWhenReady(true);
         MainActivity.playerView.setPlayer(FPlayer.player);
         MainActivity.playerView.showController();
