@@ -16,7 +16,7 @@ public class MediaItem {
         this.channelTitle = channelTitle;
         this.mThumbnail = mThumbnail;
         this.hThumbnail = hThumbnail;
-        this.uri = Uri.parse("https://fmusic-ytdl.herokuapp.com/audio?videoID=" + this.videoID);
+        this.uri = Uri.parse("https://tulamusic-servi.glitch.me/download?format=audio&id=" + this.videoID);
     }
 
     public String VideoID(){
