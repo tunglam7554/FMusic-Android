@@ -22,7 +22,7 @@ public final class C {
   public static final String MEDIA_SESSION_TAG = "audio_demo";
   public static final String DOWNLOAD_CHANNEL_ID = "download_channel";
   public static final int DOWNLOAD_NOTIFICATION_ID = 2;
-  private static String key1 = "AIzaSyCV5uZc7Ttb8B63sVyhdVIT6Of1XafXOTc";
+  private static String key1 = "YOUTUBE_API_KEY_HERE";
   public static final String popularUrl = "https://www.googleapis.com/youtube/v3/videos?part=snippet&key="+key1+"&chart=mostPopular&regionCode=vn&videoCategoryId=10&relevanceLanguage=vi&maxResults=20";
   public static final String searchUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&key="+key1+"&type=video&regionCode=vn&order=relevance&relevanceLanguage=vi&maxResults=20&q=";
 }
