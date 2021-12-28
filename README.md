@@ -1,9 +1,3 @@
-# Google I/O 2018 ExoPlayer demos
-
-This branch contains the code for the two apps built during the [ExoPlayer session at Google I/O 2018](https://www.youtube.com/watch?v=svdq1BWl4r8).
-
-`video-app` contains a minimal video player app, demonstrating how to get started with video playback, using a player view from ExoPlayer’s UI module, and how to insert ads with the IMA extension.
-
-`audio-app` shows how to play audio in an Android Service when the app is backgrounded, how to create a player notification, and how to connect with an Android media session. It also has a basic integration with ExoPlayer’s downloading functionality.
-
-These demos are intended to show how to use ExoPlayer with as little code as possible. For real apps there are some more best practices to follow, so for more comprehensive guidance on getting started using ExoPlayer, check out our [developer guide](https://google.github.io/ExoPlayer/guide.html) and [full demo apps](https://github.com/google/ExoPlayer/tree/release-v2/demos).
+Ứng dụng nghe nhạc Youtube tắt màn hình dành cho Android
+![Screenshot_2021-09-18-00-36-57-90_97c83750069d737883b2092d0c203d6a](https://user-images.githubusercontent.com/24227224/147520865-eaa038b3-55aa-40af-a30f-a798672b9889.jpg)
+![Screenshot_2021-09-25-10-01-17-89_97c83750069d737883b2092d0c203d6a](https://user-images.githubusercontent.com/24227224/147520885-3823d739-30ae-4014-ad54-cb220af4d619.jpg)
